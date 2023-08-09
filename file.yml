@@ -1,0 +1,17 @@
+---
+- name: content on file on directory
+  hosts: prod
+  become: true
+  tasks:
+    - name: creation de repertoire
+      ansible.buildin.file:
+        name: "{{ directory }}"
+        state: directory
+    - name: creation de file dans le directory
+      ansible.builtin.file:
+        name: "{{ file }}"
+        state: touch
+    - name: copy de content 
+      ansible.builtin.copy:
+        content: "{{ content }}"
+        dest: "{{ directory }}/{{ file }}"
